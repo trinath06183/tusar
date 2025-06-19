@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Birthday Flip Book</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a6c1ee, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow: hidden;
+      font-family: 'Dancing Script', cursive;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #hedlinecontainer {
+      margin: 20px 0 50px;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    #shine {
+      font-family: 'Pacifico', cursive;
+      font-size: 70px;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 300% 300%;
+      animation: gradientText 5s ease infinite;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      padding: 10px 30px;
+      border-radius: 20px;
+      display: inline-block;
+      transform-style: preserve-3d;
+      animation: float 3s ease-in-out infinite;
+      position: relative;
+      z-index: 20;
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateX(0deg); }
+      50% { transform: translateY(-15px) rotateX(5deg); }
+    }
+
+    .gallery {
+      --d: 10s;
+      display: grid;
+      place-items: center;
+      width: 300px;
+      height: 400px;
+      margin: 0 auto 40px;
+      perspective: 1000px;
+      position: relative;
+      z-index: 15;
+    }
+
+    .gallery > .card {
+      grid-area: 1/1;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      border: 10px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
+      z-index: 2;
+      animation: slide var(--d) infinite, z-order var(--d) infinite steps(1);
+      transform-origin: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery > .card:hover {
+      transform: scale(1.03);
+    }
+
+    .gallery .card:last-child {
+      animation-name: slide, z-order-last;
+    }
+
+    .gallery > .card:nth-child(1) {
+      animation-delay: calc(0*var(--d));
+      --r: 16deg;
+      background: linear-gradient(rgba(214, 65, 122, 0.8), rgba(214, 65, 122, 0.8)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+    }
+
+    .gallery > .card:nth-child(2) {
+      animation-delay: calc(-0.2*var(--d));
+      --r: -1deg;
+      background: linear-gradient(rgba(255, 154, 158, 0.8), rgba(255, 154, 158, 0.8)), url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+    }
+
+    .gallery > .card:nth-child(3) {
+      animation-delay: calc(-0.4*var(--d));
+      --r: -19deg;
+      background: linear-gradient(rgba(166, 193, 238, 0.8), rgba(166, 193, 238, 0.8)), url('https://images.unsplash.com/photo-1543080853-556086153871?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+    }
+
+    .gallery > .card:nth-child(4) {
+      animation-delay: calc(-0.6*var(--d));
+      --r: 6deg;
+      background: linear-gradient(rgba(251, 194, 235, 0.8), rgba(251, 194, 235, 0.8)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+    }
+
+    .gallery > .card:nth-child(5) {
+      animation-delay: calc(-0.8*var(--d));
+      --r: -8deg;
+      background: linear-gradient(rgba(250, 208, 196, 0.8), rgba(250, 208, 196, 0.8)), url('https://images.unsplash.com/photo-1544816155-12df9643f363?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+    }
+
+    @keyframes slide {
+      10% {
+        transform: translateX(120%) rotate(var(--r));
+      }
+      0%, 100%, 20% {
+        transform: translateX(0%) rotate(var(--r));
+      }
+    }
+
+    @keyframes z-order {
+      10%, 20% {
+        z-index: 1;
+      }
+      80% {
+        z-index: 2;
+      }
+    }
+
+    @keyframes z-order-last {
+      10%, 20% {
+        z-index: 1;
+      }
+      90% {
+        z-index: 2;
+      }
+    }
+
+    .message-container {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 15;
+      transform: translateY(20px);
+      animation: appear 1s ease-out forwards;
+      backdrop-filter: blur(5px);
+    }
+
+    @keyframes appear {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .message {
+      font-size: 28px;
+      line-height: 1.6;
+      color: #d6417a;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .signature {
+      text-align: right;
+      font-style: italic;
+      color: #333;
+      font-size: 22px;
+      margin-top: 20px;
+    }
+
+    /* Floating Hearts */
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -100px;
+      color: rgba(255, 105, 180, 0.8);
+      animation: float linear forwards;
+      font-size: 24px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes float {
+      to {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff0000;
+      animation: confetti-fall linear forwards, confetti-spin 4s linear infinite;
+      z-index: 1;
+    }
+
+    .confetti:nth-child(3n+0) { background: #ffd700; }
+    .confetti:nth-child(3n+1) { background: #00ff00; }
+    .confetti:nth-child(3n+2) { background: #0080ff; }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confetti-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Decorative elements */
+    .decoration {
+      position: absolute;
+      font-size: 40px;
+      color: rgba(255, 255, 255, 0.7);
+      z-index: 8;
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .decoration:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      color: #ff9a9e;
+    }
+
+    .decoration:nth-child(2) {
+      top: 15%;
+      right: 15%;
+      color: #a6c1ee;
+    }
+
+    .decoration:nth-child(3) {
+      bottom: 20%;
+      left: 15%;
+      color: #fbc2eb;
+    }
+
+    .decoration:nth-child(4) {
+      bottom: 15%;
+      right: 10%;
+      color: #fad0c4;
+    }
+
+    /* Mobile optimization */
+    @media only screen and (max-width: 600px) {
+      #shine {
+        font-size: 42px;
+        padding: 8px 20px;
+      }
+      
+      .gallery {
+        width: 250px;
+        height: 350px;
+      }
+      
+      .message {
+        font-size: 22px;
+      }
+      
+      .signature {
+        font-size: 20px;
+      }
+      
+      .message-container {
+        padding: 20px;
+        margin: 30px 15px;
+      }
+      
+      .decoration {
+        font-size: 30px;
+      }
+      
+      .gallery > .card {
+        font-size: 22px;
+      }
+    }
+
+    @media only screen and (max-width: 400px) {
+      #shine {
+        font-size: 36px;
+      }
+      
+      .gallery {
+        width: 220px;
+        height: 320px;
+      }
+      
+      .message {
+        font-size: 20px;
+      }
+      
+      .gallery > .card {
+        font-size: 18px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts and confetti -->
+  <div class="hearts" id="hearts-container"></div>
+  <div id="confetti-container"></div>
+  
+  <!-- Decorative elements -->
+  <div class="decoration"><i class="fas fa-birthday-cake"></i></div>
+  <div class="decoration"><i class="fas fa-gift"></i></div>
+  <div class="decoration"><i class="fas fa-glass-cheers"></i></div>
+  <div class="decoration"><i class="fas fa-heart"></i></div>
+  
+  <div class="container">
+    <div id="hedlinecontainer">
+      <div id="shine">Happy Birthday My Love!</div>
+    </div>
+    
+    <div class="gallery">
+      <div class="card">Happy Birthday to the most amazing person in my life! 💖</div>
+      <div class="card">Every day with you is a beautiful gift 🎁</div>
+      <div class="card">You make my world complete and my heart full ❤️</div>
+      <div class="card">Wishing you all the love and happiness today and always 💫</div>
+      <div class="card">Forever yours, today and every day 🌹</div>
+    </div>
+    
+    <div class="message-container">
+      <p class="message">On your special day, I want you to know how much you mean to me. Every moment with you is a treasure I cherish deeply. Your smile brightens my world, your laughter is my favorite melody, and your love is the greatest gift I've ever received.</p>
+      <p class="message">May this year bring you endless joy, beautiful memories, and all the love your heart can hold. You deserve all the happiness in the world, my darling.</p>
+      <p class="signature">With all my love,</p>
+      <p class="signature">Your Special Someone</p>
+    </div>
+  </div>
+  
+  <script>
+    // Create floating hearts
+    function createHearts() {
+      const container = document.getElementById('hearts-container');
+      const heartCount = 30;
+      
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '<i class="fas fa-heart"></i>';
+        
+        // Random position
+        heart.style.left = Math.random() * 100 + 'vw';
+        
+        // Random animation duration (10-20s)
+        const duration = 10 + Math.random() * 10;
+        heart.style.animationDuration = duration + 's';
+        
+        // Random delay
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        
+        // Random size
+        const size = 20 + Math.random() * 20;
+        heart.style.fontSize = size + 'px';
+        
+        // Random color
+        const colors = ['#ff9a9e', '#fad0c4', '#fbc2eb', '#a6c1ee', '#d6417a'];
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        container.appendChild(heart);
+      }
+    }
+    
+    // Create confetti
+    function createConfetti() {
+      const container = document.getElementById('confetti-container');
+      const confettiCount = 100;
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        // Random position
+        confetti.style.left = Math.random() * 100 + 'vw';
+        
+        // Random animation duration (5-15s)
+        const duration = 5 + Math.random() * 10;
+        confetti.style.animationDuration = duration + 's';
+        
+        // Random delay
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        
+        // Random size
+        const size = 5 + Math.random() * 10;
+        confetti.style.width = size + 'px';
+        confetti.style.height = size + 'px';
+        
+        // Random shape
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        
+        container.appendChild(confetti);
+      }
+    }
+    
+    // Initialize effects
+    document.addEventListener('DOMContentLoaded', () => {
+      createHearts();
+      createConfetti();
+    });
+  </script>
+</body>
+</html>
